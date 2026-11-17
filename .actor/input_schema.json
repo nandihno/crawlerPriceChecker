@@ -1,0 +1,76 @@
+{
+  "title": "Woolworths AU Prices input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "searchTerms": {
+      "title": "Search terms",
+      "type": "array",
+      "description": "Keywords to search, e.g. \"milk\", \"tim tam\".",
+      "editor": "stringList",
+      "prefill": [
+        "full cream milk 2l",
+        "tim tam"
+      ]
+    },
+    "stockcodes": {
+      "title": "Stockcodes (watchlist)",
+      "type": "array",
+      "description": "Woolworths product IDs, the number in /shop/productdetails/<id>/... Uses the product detail endpoint (verify on first run).",
+      "editor": "stringList"
+    },
+    "maxItemsPerSearch": {
+      "title": "Max products per search term",
+      "type": "integer",
+      "default": 72,
+      "minimum": 1,
+      "description": "Maximum number of products to collect for each search term."
+    },
+    "sortType": {
+      "title": "Sort",
+      "type": "string",
+      "editor": "select",
+      "enum": [
+        "TraderRelevance",
+        "PriceAsc",
+        "PriceDesc",
+        "Name"
+      ],
+      "default": "TraderRelevance",
+      "description": "How Woolworths should sort search results."
+    },
+    "specialsOnly": {
+      "title": "Specials only",
+      "type": "boolean",
+      "default": false,
+      "description": "Only return products currently on special."
+    },
+    "delayMs": {
+      "title": "Delay between API calls (ms)",
+      "type": "integer",
+      "default": 1500,
+      "minimum": 0,
+      "description": "Pause between API calls, in milliseconds. Raise it if you get blocked."
+    },
+    "proxyConfiguration": {
+      "title": "Proxy",
+      "type": "object",
+      "editor": "proxy",
+      "description": "Woolworths blocks datacentre and non-AU IPs. Residential AU is the reliable choice.",
+      "prefill": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ],
+        "apifyProxyCountry": "AU"
+      },
+      "default": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": [
+          "RESIDENTIAL"
+        ],
+        "apifyProxyCountry": "AU"
+      }
+    }
+  }
+}

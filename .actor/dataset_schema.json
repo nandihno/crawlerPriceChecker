@@ -1,0 +1,70 @@
+{
+  "actorSpecification": 1,
+  "fields": {},
+  "views": {
+    "products": {
+      "title": "Products",
+      "transformation": {
+        "fields": [
+          "chain",
+          "stockcode",
+          "barcode",
+          "name",
+          "brand",
+          "packageSize",
+          "price",
+          "wasPrice",
+          "savingsAmount",
+          "isOnSpecial",
+          "isHalfPrice",
+          "promotion",
+          "isMultibuy",
+          "departments",
+          "category",
+          "productLimit",
+          "cupPrice",
+          "cupMeasure",
+          "cupString",
+          "isAvailable",
+          "url",
+          "imageUrl",
+          "source",
+        "region",
+          "scrapedAt"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "name": {
+            "label": "name"
+          },
+          "brand": {
+            "label": "brand"
+          },
+          "packageSize": {
+            "label": "packageSize"
+          },
+          "price": {
+            "label": "price"
+          },
+          "wasPrice": {
+            "label": "wasPrice"
+          },
+          "isOnSpecial": {
+            "label": "isOnSpecial"
+          },
+          "promotion": {
+            "label": "promotion"
+          },
+          "cupString": {
+            "label": "cupString"
+          },
+          "url": {
+            "label": "url"
+          }
+        }
+      }
+    }
+  }
+}

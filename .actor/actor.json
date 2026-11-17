@@ -1,0 +1,13 @@
+{
+  "actorSpecification": 1,
+  "name": "woolworths-au-prices",
+  "title": "Woolworths AU Prices",
+  "description": "Collects product prices, specials and unit prices from woolworths.com.au using the site's own JSON search API.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile",
+  "storages": {
+    "dataset": "./dataset_schema.json"
+  }
+}
