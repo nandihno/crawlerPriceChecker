@@ -1,0 +1,64 @@
+{
+    "title": "ALDI AU Prices Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "searchTerms": {
+            "title": "Search terms",
+            "type": "array",
+            "description": "Keywords to search on aldi.com.au (e.g. \"milk\", \"bread\", \"bananas\").",
+            "editor": "stringList",
+            "default": ["milk"],
+            "prefill": ["milk"]
+        },
+        "skus": {
+            "title": "Product SKUs",
+            "type": "array",
+            "description": "Specific ALDI AU product SKUs to fetch directly (e.g. \"000000000000385792\" or \"385792\").",
+            "editor": "stringList",
+            "default": []
+        },
+        "maxItemsPerSearch": {
+            "title": "Max items per search term",
+            "type": "integer",
+            "description": "Maximum number of products to collect for each search term.",
+            "default": 36,
+            "minimum": 1,
+            "maximum": 500
+        },
+        "serviceType": {
+            "title": "Service type",
+            "type": "string",
+            "description": "ALDI API serviceType query parameter.",
+            "editor": "select",
+            "default": "walk-in",
+            "enum": ["walk-in", "pickup", "delivery"]
+        },
+        "region": {
+            "title": "Region label",
+            "type": "string",
+            "description": "Optional region tag stored on each dataset item (e.g. \"syd1\", \"mel1\", \"au\").",
+            "editor": "textfield",
+            "default": "au"
+        },
+        "delayMs": {
+            "title": "Delay between requests (ms)",
+            "type": "integer",
+            "description": "Polite delay in milliseconds between API requests.",
+            "default": 1200,
+            "minimum": 0,
+            "maximum": 10000
+        },
+        "proxyConfiguration": {
+            "title": "Proxy configuration",
+            "type": "object",
+            "description": "Residential AU proxy is recommended if ALDI rate-limits datacenter IPs.",
+            "editor": "proxy",
+            "default": {
+                "useApifyProxy": true,
+                "apifyProxyGroups": ["RESIDENTIAL"],
+                "apifyProxyCountry": "AU"
+            }
+        }
+    }
+}

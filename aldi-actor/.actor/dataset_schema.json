@@ -1,0 +1,66 @@
+{
+    "actorSpecification": 1,
+    "fields": {},
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": {
+                "fields": [
+                    "chain",
+                    "stockcode",
+                    "name",
+                    "brand",
+                    "packageSize",
+                    "price",
+                    "wasPrice",
+                    "savingsAmount",
+                    "isOnSpecial",
+                    "isHalfPrice",
+                    "promotion",
+                    "isMultibuy",
+                    "departments",
+                    "category",
+                    "productLimit",
+                    "cupPrice",
+                    "cupMeasure",
+                    "cupString",
+                    "isAvailable",
+                    "url",
+                    "imageUrl",
+                    "source",
+                    "region",
+                    "scrapedAt"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "chain": { "label": "Chain", "format": "text" },
+                    "stockcode": { "label": "Stockcode", "format": "number" },
+                    "name": { "label": "Product", "format": "text" },
+                    "brand": { "label": "Brand", "format": "text" },
+                    "packageSize": { "label": "Size", "format": "text" },
+                    "price": { "label": "Price ($)", "format": "number" },
+                    "wasPrice": { "label": "Was ($)", "format": "number" },
+                    "savingsAmount": { "label": "Save ($)", "format": "number" },
+                    "isOnSpecial": { "label": "Special", "format": "boolean" },
+                    "isHalfPrice": { "label": "Half Price", "format": "boolean" },
+                    "promotion": { "label": "Promotion", "format": "text" },
+                    "isMultibuy": { "label": "Multibuy", "format": "boolean" },
+                    "departments": { "label": "Departments", "format": "array" },
+                    "category": { "label": "Category", "format": "text" },
+                    "productLimit": { "label": "Limit", "format": "number" },
+                    "cupPrice": { "label": "Unit Price ($)", "format": "number" },
+                    "cupMeasure": { "label": "Unit Measure", "format": "text" },
+                    "cupString": { "label": "Unit Price Text", "format": "text" },
+                    "isAvailable": { "label": "Available", "format": "boolean" },
+                    "url": { "label": "URL", "format": "link" },
+                    "imageUrl": { "label": "Image", "format": "image" },
+                    "source": { "label": "Source", "format": "text" },
+                    "region": { "label": "Region", "format": "text" },
+                    "scrapedAt": { "label": "Scraped At", "format": "date" }
+                }
+            }
+        }
+    }
+}

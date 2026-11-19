@@ -1,0 +1,15 @@
+{
+    "actorSpecification": 1,
+    "name": "aldi-au-prices",
+    "title": "ALDI AU Prices",
+    "description": "Scrapes ALDI Australia (aldi.com.au) grocery product prices, unit prices, and specials in the same normalized schema as woolworths-au-prices.",
+    "version": "0.1",
+    "meta": {
+        "templateId": "js-playwright"
+    },
+    "input": "./input_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "dockerfile": "../Dockerfile"
+}

@@ -2,5 +2,6 @@ node_modules
 storage
 docs
 supabase
+aldi-actor
 .idea
 .DS_Store
