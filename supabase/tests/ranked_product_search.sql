@@ -2,7 +2,9 @@
 begin;
 
 insert into public.scrape_runs (id, apify_run_id)
-values ('10000000-0000-0000-0000-000000000000', 'ranked-search-test');
+values
+  ('10000000-0000-0000-0000-000000000000', 'ranked-search-test'),
+  ('10000000-0000-0000-0000-000000000001', 'ranked-search-test-newer');
 
 insert into public.products (stockcode, name) values
   (1, 'Milk'),
@@ -16,11 +18,18 @@ insert into public.products (stockcode, name) values
   (9, 'Oat Drink'),
   (10, 'Milk And Oat'),
   (11, 'Milk without a price'),
-  (12, 'Millk');
+  (12, 'Millk'),
+  (13, 'Organic Full Cream Milk'),
+  (14, 'Organc Milk');
 
 insert into public.price_history (product_id, run_id, stockcode, price, scraped_at)
-select id, '10000000-0000-0000-0000-000000000000', stockcode, 2.00, now()
+select id, '10000000-0000-0000-0000-000000000000', stockcode, 2.00, now() - interval '1 day'
 from public.products where stockcode <> 11;
+
+-- Add a newer price snapshot for stockcode 2 ('Oat Milk 1L') to verify latest snapshot selection.
+insert into public.price_history (product_id, run_id, stockcode, price, scraped_at)
+select id, '10000000-0000-0000-0000-000000000001', stockcode, 3.25, now()
+from public.products where stockcode = 2;
 
 set local role anon;
 
@@ -78,6 +87,35 @@ begin
   from public.search_products('milk', 50, 2) with ordinality;
   if first_page || second_page is distinct from expected then
     raise exception 'Pagination changed the result order';
+  end if;
+
+  -- Multi-word non-contiguous prefix type-ahead with short (< 4 char) trailing prefix.
+  select array_agg(name order by ordinality) into matches
+  from public.search_products('oat lif', 50, 0) with ordinality;
+  if matches is distinct from array['Oat Long Life Milk'] then
+    raise exception 'Multi-word short prefix search failed: %', matches;
+  end if;
+
+  -- Unstemmed prefix type-ahead ('organi' -> 'Organic', where English stem is 'organ').
+  select array_agg(name order by ordinality) into matches
+  from public.search_products('organi mil', 50, 0) with ordinality;
+  if matches is distinct from array['Organic Full Cream Milk'] then
+    raise exception 'Simple dictionary prefix search failed: %', matches;
+  end if;
+
+  -- Prefix match (Tier 5) ranks ahead of fuzzy typo match (Tier 6).
+  select array_agg(name order by ordinality) into matches
+  from public.search_products('milk organi', 50, 0) with ordinality;
+  if matches is null
+    or array_position(matches, 'Organic Full Cream Milk') is null
+    or array_position(matches, 'Organc Milk') is null
+    or array_position(matches, 'Organic Full Cream Milk') >= array_position(matches, 'Organc Milk') then
+    raise exception 'Prefix vs typo ranking failed: %', matches;
+  end if;
+
+  -- Latest price_history snapshot is returned when multiple snapshots exist.
+  if (select price from public.search_products('Oat Milk 1L', 1, 0)) is distinct from 3.25 then
+    raise exception 'Latest price snapshot was not returned for Oat Milk 1L';
   end if;
 end;
 $$;
