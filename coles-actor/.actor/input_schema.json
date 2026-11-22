@@ -1,0 +1,56 @@
+{
+    "title": "Coles AU Prices Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "searchTerms": {
+            "title": "Search terms",
+            "type": "array",
+            "description": "Keywords to search on coles.com.au (e.g. \"milk\", \"bread\", \"bananas\").",
+            "editor": "stringList",
+            "default": ["milk"],
+            "prefill": ["milk"]
+        },
+        "productIds": {
+            "title": "Product IDs",
+            "type": "array",
+            "description": "Specific Coles AU product IDs to fetch directly (e.g. \"422493\").",
+            "editor": "stringList",
+            "default": []
+        },
+        "maxItemsPerSearch": {
+            "title": "Max items per search term",
+            "type": "integer",
+            "description": "Maximum number of products to collect for each search term.",
+            "default": 48,
+            "minimum": 1,
+            "maximum": 500
+        },
+        "region": {
+            "title": "Region label",
+            "type": "string",
+            "description": "Optional region tag stored on each dataset item (e.g. \"syd1\", \"mel1\", \"au\").",
+            "editor": "textfield",
+            "default": "au"
+        },
+        "delayMs": {
+            "title": "Delay between requests (ms)",
+            "type": "integer",
+            "description": "Polite delay in milliseconds between page/API requests.",
+            "default": 1500,
+            "minimum": 0,
+            "maximum": 10000
+        },
+        "proxyConfiguration": {
+            "title": "Proxy configuration",
+            "type": "object",
+            "description": "Residential AU proxy is required to pass Coles Imperva/Incapsula protection.",
+            "editor": "proxy",
+            "default": {
+                "useApifyProxy": true,
+                "apifyProxyGroups": ["RESIDENTIAL"],
+                "apifyProxyCountry": "AU"
+            }
+        }
+    }
+}

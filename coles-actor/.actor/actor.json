@@ -1,0 +1,15 @@
+{
+    "actorSpecification": 1,
+    "name": "coles-au-prices",
+    "title": "Coles AU Prices",
+    "description": "Scrapes Coles Australia (coles.com.au) grocery product prices, unit prices, and specials in the same normalized schema as woolworths-au-prices and aldi-au-prices.",
+    "version": "0.1",
+    "meta": {
+        "templateId": "js-playwright"
+    },
+    "input": "./input_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json"
+    },
+    "dockerfile": "../Dockerfile"
+}
