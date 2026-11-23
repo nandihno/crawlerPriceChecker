@@ -3,5 +3,6 @@ storage
 docs
 supabase
 aldi-actor
+coles-actor
 .idea
 .DS_Store

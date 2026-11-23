@@ -136,13 +136,13 @@ try {
         let collected = 0;
         let offset = 0;
 
+        // ALDI accepts only specific page sizes. Apply the product cap after deduplication.
         while (collected < maxItemsPerSearch) {
-            const limit = Math.min(PAGE_SIZE, maxItemsPerSearch - collected);
             const params = new URLSearchParams({
                 currency: 'AUD',
                 serviceType,
                 q: term,
-                limit: String(limit),
+                limit: String(PAGE_SIZE),
                 offset: String(offset),
                 sort: 'relevance',
             });
@@ -185,7 +185,7 @@ try {
             }
 
             offset += items.length;
-            if (offset >= total || items.length < limit) break;
+            if (offset >= total || items.length < PAGE_SIZE) break;
             if (delayMs > 0) await sleep(delayMs);
         }
 

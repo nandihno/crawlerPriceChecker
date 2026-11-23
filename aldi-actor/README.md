@@ -26,7 +26,7 @@ npm test
 | --- | --- | --- | --- |
 | `searchTerms` | `string[]` | `["milk"]` | Keywords to search on `aldi.com.au` |
 | `skus` | `string[]` | `[]` | Specific ALDI product SKUs to fetch directly |
-| `maxItemsPerSearch` | `integer` | `36` | Max products per search term |
+| `maxItemsPerSearch` | `integer` | `36` | Maximum distinct products added per search term. API requests use pages of 30. |
 | `serviceType` | `string` | `"walk-in"` | ALDI API `serviceType` (`walk-in`, `pickup`, `delivery`) |
 | `region` | `string` | `"au"` | Region tag stored on each dataset item |
 | `delayMs` | `integer` | `1200` | Delay in ms between API requests |
